@@ -1,0 +1,14 @@
+# Cloudflare Pages Configuration for Standub Website
+
+# Build settings
+# Build command: (none needed for static site)
+# Build output directory: /
+
+# Environment variables (set in Cloudflare Pages dashboard)
+# No environment variables needed for this static site
+
+# Custom headers for performance and security
+# These are defined in _headers file
+
+# Redirects (if needed)
+# These are defined in _redirects file
