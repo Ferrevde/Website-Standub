@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Music — Standub</title>
+<meta name="description" content="Standub — Belgian solo live electronic performer. Beatboxing, synths, loops, atmosphere." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,300&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+<nav aria-label="Primary" style="position:absolute;top:0;left:0;right:0;z-index:10;padding:1rem 1.5rem;display:flex;gap:1.5rem;flex-wrap:wrap;align-items:center;background:linear-gradient(180deg,rgba(10,12,20,0.7),transparent);">
+<a href="/" style="color:var(--paper);text-decoration:none;font-size:.9rem;letter-spacing:.05em;text-transform:uppercase;">Home</a>
+<a href="/about" style="color:var(--paper);text-decoration:none;font-size:.9rem;letter-spacing:.05em;text-transform:uppercase;">About</a>
+<a href="/live" style="color:var(--paper);text-decoration:none;font-size:.9rem;letter-spacing:.05em;text-transform:uppercase;">Live</a>
+<a href="/music" style="color:var(--paper);text-decoration:none;font-size:.9rem;letter-spacing:.05em;text-transform:uppercase;">Music</a>
+<a href="/performances" style="color:var(--paper);text-decoration:none;font-size:.9rem;letter-spacing:.05em;text-transform:uppercase;">Performances</a>
+<a href="/workshops" style="color:var(--paper);text-decoration:none;font-size:.9rem;letter-spacing:.05em;text-transform:uppercase;">Workshops</a>
+<a href="/contact" style="color:var(--paper);text-decoration:none;font-size:.9rem;letter-spacing:.05em;text-transform:uppercase;">Contact</a>
+</nav>
+<main>
+id="releases" style="padding:6rem 0">
+<div class="container">
+<h2 style="font-family:Space Grotesk,sans-serif;font-weight:700;font-size:clamp(2rem,5vw,3.5rem);letter-spacing:-0.02em;text-transform:uppercase;margin-bottom:1rem">Listen to the music</h2>
+<p style="color:var(--mist);max-width:60ch;font-size:1.05rem;line-height:1.5">Standub's music exists both as a live creation and as recorded work. The recordings capture moments from performances — not polished productions — and are released when they are ready.</p>
+
+<div id="music-grid" style="display:grid;gap:2rem;margin-top:3rem;grid-template-columns:repeat(auto-fill,minmax(280px,1fr))">
+  <article class="card" style="background:rgba(242,240,234,0.03);border:1px solid rgba(242,240,234,0.08);padding:2rem;border-radius:12px;text-align:center">
+    <div style="aspect-ratio:1/1;background:linear-gradient(135deg,#181220,#0f0c18);border-radius:8px;margin-bottom:1rem;display:flex;align-items:center;justify-content:center;color:rgba(242,240,234,0.35);font-style:italic">Artwork placeholder</div>
+    <h3 style="font-family:Cormorant Garamond,Georgia,serif;font-weight:300;font-style:italic;font-size:1.4rem;color:var(--paper);margin-bottom:.25rem">Music will appear here soon.</h3>
+    <p style="font-size:.85rem;color:var(--mist)">Real releases, artwork and streaming links will be added to <code>src/data.js</code> when available.</p>
+  </article>
+</div>
+
+<div style="margin-top:3rem;padding-top:2rem;border-top:1px solid rgba(242,240,234,0.1);color:var(--mist);font-size:.9rem">
+<p><strong>Data file:</strong> <code>src/data.js</code> — add releases with <code>title</code>, <code>type</code>, <code>date</code>, <code>artwork</code>, <code>description</code>, <code>links</code>. The layout will render them automatically.</p>
+</div>
+</div>
+</section>
+
+
+</main>
+<footer style="border-top:1px solid rgba(242,240,234,0.1);padding:2rem 0;text-align:center;color:rgba(242,240,234,0.4);font-size:.85rem">Standub — Belgian solo live electronic performer</footer>
+</body>
+</html>
