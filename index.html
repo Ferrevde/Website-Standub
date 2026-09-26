@@ -45,7 +45,7 @@
 <script>
 (async () => {
   try {
-    const res = await fetch("/api/tour-dates");
+    const res = await fetch("https://standub-worker.stanmeeus.workers.dev/api/tour-dates");
     const data = await res.json();
     const list = document.getElementById("tour-list");
     if (!Array.isArray(data) || data.length === 0) {

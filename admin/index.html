@@ -54,7 +54,7 @@ function setAuth() {
 }
 async function loadDates() {
   try {
-    const res = await fetch("/api/tour-dates");
+    const res = await fetch("https://standub-worker.stanmeeus.workers.dev/api/tour-dates");
     const data = await res.json();
     const tbody = document.getElementById("dates-table");
     tbody.innerHTML = (Array.isArray(data) ? data : []).map(d => `
@@ -69,7 +69,7 @@ async function loadDates() {
   } catch (e) { document.getElementById("dates-table").innerHTML = "<tr><td colspan='6'>Unable to load data.</td></tr>"; }
 }
 function editRow(id) {
-  fetch("/api/tour-dates", { headers: { "X-Admin-Auth": auth } })
+  fetch("https://standub-worker.stanmeeus.workers.dev/api/tour-dates", { headers: { "X-Admin-Auth": auth } })
     .then(r => r.json()).then(data => {
       const all = Array.isArray(data) ? data : [];
       const item = all.find(x => x.id === id);
@@ -104,7 +104,7 @@ async function addDate() {
     soldOut: document.getElementById("soldOut").checked
   };
   try {
-    const res = await fetch("/api/tour-dates", { method: "PUT", headers: { "Content-Type": "application/json", "X-Admin-Auth": auth }, body: JSON.stringify(payload) });
+    const res = await fetch("https://standub-worker.stanmeeus.workers.dev/api/tour-dates", { method: "PUT", headers: { "Content-Type": "application/json", "X-Admin-Auth": auth }, body: JSON.stringify(payload) });
     const result = await res.json();
     if (!res.ok) { alert(result.error || "Save failed"); return; }
     alert("Saved");
@@ -114,7 +114,7 @@ async function addDate() {
 }
 async function delRow(id) {
   try {
-    const res = await fetch("/api/tour-dates/" + encodeURIComponent(id), { method: "DELETE", headers: { "X-Admin-Auth": auth } });
+    const res = await fetch("https://standub-worker.stanmeeus.workers.dev/api/tour-dates/" + encodeURIComponent(id), { method: "DELETE", headers: { "X-Admin-Auth": auth } });
     const result = await res.json();
     if (!res.ok) { alert(result.error || "Delete failed"); return; }
     alert("Deleted");

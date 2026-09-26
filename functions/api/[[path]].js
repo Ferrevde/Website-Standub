@@ -3,11 +3,23 @@ export default {
     const url = new URL(request.url);
     const path = url.pathname;
 
+    // CORS: reflect request origin when present (accept pages + worker origins)
+    const origin = request.headers.get("Origin") || "*";
+    const corsHeaders = {
+      "Access-Control-Allow-Origin": origin,
+      "Access-Control-Allow-Methods": "GET, PUT, DELETE, OPTIONS",
+      "Access-Control-Allow-Headers": "Content-Type, X-Admin-Auth",
+      "Access-Control-Max-Age": "86400"
+    };
+    if (request.method === "OPTIONS") {
+      return new Response(null, { status: 204, headers: corsHeaders });
+    }
+
     // Helper: check auth for write operations
     const checkAuth = () => {
       const auth = request.headers.get("X-Admin-Auth") || "";
       if (!env.ADMIN_PASSWORD || auth !== env.ADMIN_PASSWORD) {
-        return new Response(JSON.stringify({ error: "Unauthorized" }), { status: 401, headers: { "Content-Type": "application/json" } });
+        return new Response(JSON.stringify({ error: "Unauthorized" }), { status: 401, headers: { ...corsHeaders, "Content-Type": "application/json" } });
       }
       return null;
     };
@@ -26,9 +38,9 @@ export default {
           try { return new Date(d.date) >= new Date(now.toISOString().split("T")[0]); } catch { return false; }
         });
         upcoming.sort((a, b) => new Date(a.date) - new Date(b.date));
-        return new Response(JSON.stringify(upcoming), { headers: { "Content-Type": "application/json" } });
+        return new Response(JSON.stringify(upcoming), { headers: { ...corsHeaders, "Content-Type": "application/json" } });
       } catch (e) {
-        return new Response(JSON.stringify([]), { headers: { "Content-Type": "application/json" } });
+        return new Response(JSON.stringify([]), { headers: { ...corsHeaders, "Content-Type": "application/json" } });
       }
     }
 
@@ -62,9 +74,9 @@ export default {
           if (idx >= 0) existing[idx] = item; else existing.push(item);
         }
         await env.TOUR_DATES.put("tour-dates", JSON.stringify(existing));
-        return new Response(JSON.stringify({ success: true, count: payload.length }), { headers: { "Content-Type": "application/json" } });
+        return new Response(JSON.stringify({ success: true, count: payload.length }), { headers: { ...corsHeaders, "Content-Type": "application/json" } });
       } catch (e) {
-        return new Response(JSON.stringify({ error: e.message || "Invalid data" }), { status: 400, headers: { "Content-Type": "application/json" } });
+        return new Response(JSON.stringify({ error: e.message || "Invalid data" }), { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } });
       }
     }
 
@@ -80,12 +92,12 @@ export default {
         if (!Array.isArray(existing)) existing = [];
         const filtered = existing.filter(e => e.id !== id);
         await env.TOUR_DATES.put("tour-dates", JSON.stringify(filtered));
-        return new Response(JSON.stringify({ success: true, id, remaining: filtered.length }), { headers: { "Content-Type": "application/json" } });
+        return new Response(JSON.stringify({ success: true, id, remaining: filtered.length }), { headers: { ...corsHeaders, "Content-Type": "application/json" } });
       } catch (e) {
-        return new Response(JSON.stringify({ error: "Failed to delete" }), { status: 500, headers: { "Content-Type": "application/json" } });
+        return new Response(JSON.stringify({ error: "Failed to delete" }), { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } });
       }
     }
 
-    return new Response("Not found", { status: 404 });
+    return new Response("Not found", { status: 404, headers: corsHeaders });
   }
 };
