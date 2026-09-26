@@ -8,57 +8,61 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,300&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="/styles.css" />
+<meta property="og:title" content="Standub — Live Electronic Music" />
+<meta property="og:description" content="Belgian solo live electronic performer. Beatboxing, synths, loops, atmosphere." />
+<meta property="og:type" content="website" />
+<meta name="theme-color" content="#0a0c14" />
 </head>
 <body>
-<nav aria-label="Primary" style="position:absolute;top:0;left:0;right:0;z-index:10;padding:1rem 1.5rem;display:flex;gap:1.5rem;flex-wrap:wrap;align-items:center;background:linear-gradient(180deg,rgba(10,12,20,0.7),transparent);">
-<a href="/" style="color:var(--paper);text-decoration:none;font-size:.9rem;letter-spacing:.05em;text-transform:uppercase;">Home</a>
-<a href="/about" style="color:var(--paper);text-decoration:none;font-size:.9rem;letter-spacing:.05em;text-transform:uppercase;">About</a>
-<a href="/live" style="color:var(--paper);text-decoration:none;font-size:.9rem;letter-spacing:.05em;text-transform:uppercase;">Live</a>
-<a href="/music" style="color:var(--paper);text-decoration:none;font-size:.9rem;letter-spacing:.05em;text-transform:uppercase;">Music</a>
-<a href="/performances" style="color:var(--paper);text-decoration:none;font-size:.9rem;letter-spacing:.05em;text-transform:uppercase;">Performances</a>
-<a href="/workshops" style="color:var(--paper);text-decoration:none;font-size:.9rem;letter-spacing:.05em;text-transform:uppercase;">Workshops</a>
-<a href="/contact" style="color:var(--paper);text-decoration:none;font-size:.9rem;letter-spacing:.05em;text-transform:uppercase;">Contact</a>
+<nav aria-label="Primary" class="site-nav">
+<a href="/" >Home</a>
+<a href="/about" >About</a>
+<a href="/live" >Live</a>
+<a href="/music" >Music</a>
+<a href="/performances" >Performances</a>
+<a href="/workshops" >Workshops</a>
+<a href="/contact" >Contact</a>
 </nav>
 <main>
 <section class="hero" aria-label="Hero">
-<div class="container fade" style="position:relative;z-index:2">
-<h1 style="font-family:'Cormorant Garamond',Georgia,serif;font-weight:300;font-style:italic;font-size:clamp(3.5rem,12vw,9rem);line-height:0.9;letter-spacing:-0.03em;color:var(--paper);">STANDUB</h1>
-<p style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(1.2rem,3vw,2rem);text-transform:uppercase;letter-spacing:.06em;margin-top:.5rem;color:var(--rust);">One man. A world of sound. Created live.</p>
-<p style="font-size:1.05rem;color:var(--mist);max-width:60ch;margin-top:1.25rem;line-height:1.5">From dreamy soundscapes to heavy basslines, Standub combines beatboxing, vocals and synthesis into an ever-evolving live performance.</p>
-<div style="margin-top:2rem;display:flex;gap:1rem;flex-wrap:wrap">
-<a href="/contact" style="display:inline-block;padding:.65rem 1.2rem;background:var(--rust);color:#fff;text-decoration:none;font-weight:500;border-radius:6px">Bring Standub to your stage</a>
-<a href="/music" style="display:inline-block;padding:.65rem 1.2rem;border:1px solid rgba(242,240,234,0.35);color:var(--paper);text-decoration:none;font-weight:500;border-radius:6px">Listen to the music</a>
+<div class="container hero-inner fade">
+<h1 class="hero-title">STANDUB</h1>
+<p class="hero-tagline">One man. A world of sound. Created live.</p>
+<p class="hero-description">From dreamy soundscapes to heavy basslines, Standub combines beatboxing, vocals and synthesis into an ever-evolving live performance.</p>
+<div class="hero-actions">
+<a href="/contact" class="button button-primary">Bring Standub to your stage</a>
+<a href="/music" class="button button-secondary">Listen to the music</a>
 </div>
 </div>
-</section><section class="section" aria-label="Intro" id="intro" style="padding:4rem 0">
-<div class="container" style="max-width:65ch">
-<h2 style="font-family:'Cormorant Garamond',Georgia,serif;font-weight:300;font-style:italic;font-size:clamp(2rem,5vw,3rem);line-height:0.95;color:var(--paper);letter-spacing:-0.02em">Created in the moment. Built from sound.</h2>
-<p style="color:var(--mist);font-size:1.05rem;line-height:1.6;margin-top:1rem">Standub is a one-man-band performance built around live creation. Beatboxing, vocals, synthesizers and loops become the building blocks of each moment — improvised, responsive, and shared with the room.</p>
+</section><section class="section" aria-label="Intro" id="intro" >
+<div class="container narrow">
+<h2 class="section-heading editorial-heading">Created in the moment. Built from sound.</h2>
+<p class="section-body">Standub is a one-man-band performance built around live creation. Beatboxing, vocals, synthesizers and loops become the building blocks of each moment — improvised, responsive, and shared with the room.</p>
 </div>
-</section><section class="section" aria-label="Music teaser" style="padding:3rem 0;background:rgba(242,240,234,0.03)">
+</section><section class="section section-teaser" aria-label="Music teaser">
 <div class="container">
-<div style="display:grid;gap:2rem;grid-template-columns:1fr 1fr;align-items:center">
+<div class="teaser-grid">
 <div>
-<h3 style="font-family:'Cormorant Garamond',Georgia,serif;font-weight:300;font-style:italic;font-size:1.8rem;color:var(--paper)">Original music</h3>
-<p style="color:var(--mist);font-size:.95rem;line-height:1.5">The recordings capture moments from performances — not polished productions — and will be listed here when ready.</p>
-<a href="/music" style="display:inline-block;margin-top:1rem;color:var(--rust);text-decoration:none;font-weight:500">Explore music →</a>
+<h3 class="teaser-title">Original music</h3>
+<p class="teaser-text">The recordings capture moments from performances — not polished productions — and will be listed here when ready.</p>
+<a href="/music" class="teaser-link">Explore music →</a>
 </div>
-<div style="aspect-ratio:4/3;background:linear-gradient(135deg,#181220,#0f0c18);border:1px solid rgba(242,240,234,0.12);border-radius:12px;display:flex;align-items:center;justify-content:center;color:rgba(242,240,234,0.35);font-style:italic">Music artwork placeholder</div>
+<div class="media-placeholder">Music artwork placeholder</div>
 </div>
 </div>
-</section><section class="section" aria-label="Performances teaser" style="padding:3rem 0">
+</section><section class="section" aria-label="Performances teaser" >
 <div class="container">
-<div style="display:grid;gap:2rem;grid-template-columns:1fr 1fr;align-items:center">
-<div style="aspect-ratio:4/3;background:linear-gradient(135deg,#181220,#0f0c18);border:1px solid rgba(242,240,234,0.12);border-radius:12px;display:flex;align-items:center;justify-content:center;color:rgba(242,240,234,0.35);font-style:italic">Performance photo placeholder</div>
+<div class="teaser-grid">
+<div class="media-placeholder">Performance photo placeholder</div>
 <div>
-<h3 style="font-family:'Cormorant Garamond',Georgia,serif;font-weight:300;font-style:italic;font-size:1.8rem;color:var(--paper)">Upcoming performances</h3>
-<p style="color:var(--mist);font-size:.95rem;line-height:1.5">No confirmed dates yet — check back, or get in touch to bring Standub to your venue.</p>
-<a href="/performances" style="display:inline-block;margin-top:1rem;color:var(--rust);text-decoration:none;font-weight:500">Upcoming dates →</a>
+<h3 class="teaser-title">Upcoming performances</h3>
+<p class="teaser-text">No confirmed dates yet — check back, or get in touch to bring Standub to your venue.</p>
+<a href="/performances" class="teaser-link">Upcoming dates →</a>
 </div>
 </div>
 </div>
 </section>
 </main>
-<footer style="border-top:1px solid rgba(242,240,234,0.1);padding:2rem 0;text-align:center;color:rgba(242,240,234,0.4);font-size:.85rem">Standub — Belgian solo live electronic performer</footer>
+<footer class="site-footer">Standub — Belgian solo live electronic performer</footer>
 </body>
 </html>
