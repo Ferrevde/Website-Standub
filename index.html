@@ -37,10 +37,30 @@
 <section class="section" id="tour" aria-label="Upcoming Tour Dates">
 <div class="container">
 <h2 class="section-heading">Upcoming tour dates</h2>
-<div style="margin-top:2rem;position:relative;aspect-ratio:21/9;max-width:1000px;border:1px solid rgba(242,240,234,0.12);border-radius:12px;overflow:hidden;background:#12101a">
-<video autoplay muted loop playsinline preload="metadata" aria-label="Looping tour background video" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;z-index:0" src="" poster=""></video>
-<div style="position:relative;z-index:1;display:flex;align-items:center;justify-content:center;min-height:320px;padding:2rem;text-align:center;color:rgba(242,240,234,0.45);font-style:italic">Placeholder — looping background video (replace with authentic Standub footage)</div>
+<div id="video-section" style="margin-top:2rem;position:relative;aspect-ratio:21/9;max-width:1000px;border:1px solid rgba(242,240,234,0.12);border-radius:12px;overflow:hidden;background:#12101a;min-height:320px">
+<div id="video-player" style="position:absolute;inset:0;z-index:1"></div>
 </div>
+<script>
+(async () => {
+  try {
+    const res = await fetch("https://video.stanmeeus.workers.dev/video");
+    const cfg = await res.json();
+    const container = document.getElementById("video-player");
+    if (cfg.enabled && cfg.url) {
+      const id = cfg.url.match(/(?:v=|youtu\.be\/)([a-zA-Z0-9_-]+)/)?.[1];
+      if (id) {
+        container.innerHTML = `<iframe src="https://www.youtube.com/embed/${id}?autoplay=1&mute=1&loop=1&playlist=${id}&controls=0&playsinline=1&rel=0" style="position:absolute;inset:0;width:100%;height:100%;border:0;pointer-events:none" allow="autoplay; encrypted-media" title="Tour video"></iframe>`;
+      } else {
+        container.innerHTML = `<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:rgba(242,240,234,0.45);font-style:italic">Placeholder — looping background video (replace with authentic Standub footage)</div>`;
+      }
+    } else {
+      container.innerHTML = `<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:rgba(242,240,234,0.45);font-style:italic">No video configured.</div>`;
+    }
+  } catch (e) {
+    document.getElementById("video-player").innerHTML = `<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:rgba(242,240,234,0.45);font-style:italic">Video unavailable.</div>`;
+  }
+})();
+</script>
 <div id="tour-list" style="margin-top:2rem;"></div>
 <script>
 (async () => {

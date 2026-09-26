@@ -42,6 +42,51 @@
 </div>
 </div>
 </section>
+
+<section class="section" id="video-admin" aria-label="Tour Video Admin" style="padding-top:3rem">
+<div class="container" style="max-width:700px">
+<h2 class="section-heading">Tour Video</h2>
+<div id="video-status" style="margin-top:1rem;color:var(--mist);font-size:.95rem"></div>
+<div style="margin-top:1.5rem;display:grid;gap:.75rem;grid-template-columns:1fr 1fr;align-items:end">
+<input id="video-url" type="text" placeholder="https://www.youtube.com/watch?v=..." style="width:100%;padding:.55rem;background:#0a0c14;border:1px solid rgba(242,240,234,0.25);color:var(--paper);border-radius:6px;font-family:inherit" />
+<label style="display:flex;align-items:center;gap:.5rem;color:var(--mist);font-size:.9rem"><input id="video-enabled" type="checkbox" /> Enabled</label>
+</div>
+<div style="margin-top:.75rem;display:flex;gap:.5rem">
+<button onclick="saveVideo()" style="padding:.55rem 1rem;background:var(--rust);color:#fff;border:none;border-radius:6px;font-weight:500;cursor:pointer">Save</button>
+<button onclick="deleteVideo()" style="padding:.55rem 1rem;background:transparent;border:1px solid rgba(242,240,234,0.35);color:var(--paper);border-radius:6px;cursor:pointer">Reset</button>
+</div>
+</div>
+</section>
+<script>
+async function loadVideo() {
+  try {
+    const res = await fetch("https://video.stanmeeus.workers.dev/video");
+    if (!res.ok) { document.getElementById("video-status").textContent = "Unable to load video config."; return; }
+    const cfg = await res.json();
+    document.getElementById("video-url").value = cfg.url || "";
+    document.getElementById("video-enabled").checked = !!cfg.enabled;
+    document.getElementById("video-status").textContent = cfg.url ? (cfg.enabled ? "Configured (enabled)" : "Configured (disabled)") : "No video configured.";
+  } catch (e) { document.getElementById("video-status").textContent = "Unable to load video config."; }
+}
+function saveVideo() {
+  const pw = document.getElementById("pwd").value.trim();
+  if (!pw) { alert("Enter admin password"); return; }
+  const payload = { url: document.getElementById("video-url").value.trim(), enabled: document.getElementById("video-enabled").checked };
+  fetch("https://video.stanmeeus.workers.dev/video", { method: "PUT", headers: { "Content-Type":"application/json", "X-Admin-Auth": pw }, body: JSON.stringify(payload) })
+    .then(r => r.json()).then(j => { alert(j.success ? "Saved" : (j.error || "Failed")); loadVideo(); }).catch(() => alert("Network error"));
+}
+function deleteVideo() {
+  const pw = document.getElementById("pwd").value.trim();
+  if (!pw) { alert("Enter admin password"); return; }
+  fetch("https://video.stanmeeus.workers.dev/video", { method: "DELETE", headers: { "X-Admin-Auth": pw } })
+    .then(r => r.json()).then(j => { alert(j.success ? "Reset" : (j.error || "Failed")); loadVideo(); }).catch(() => alert("Network error"));
+}
+// Load video when panel unlocked (call after setAuth if visible)
+const origSetAuth = window.setAuth || function(){};
+window.setAuth = function() { if (document.getElementById("admin-panel").style.display !== "none") loadVideo(); origSetAuth(); };
+// Try load immediately if already unlocked
+loadVideo();
+</script>
 </main>
 <footer style="border-top:1px solid rgba(242,240,234,0.1);padding:2rem 0;text-align:center;color:rgba(242,240,234,0.4);font-size:.85rem">Standub — Admin</footer>
 <script>

@@ -1,0 +1,9 @@
+name = "video"
+main = "index.js"
+compatibility_date = "2026-09-26"
+
+# Create KV namespace named "standub-video" in Cloudflare dashboard
+# Then set the binding ID below (or link via wrangler kv:namespace link)
+[[kv_namespaces]]
+binding = "VIDEO"
+id = "7c4f1012079f4ac78040cf948e98de11"  # SET ME: replace with real standub-video namespace ID before deploy
