@@ -41,7 +41,7 @@
 <video autoplay muted loop playsinline preload="metadata" aria-label="Looping tour background video" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;z-index:0" src="" poster=""></video>
 <div style="position:relative;z-index:1;display:flex;align-items:center;justify-content:center;min-height:320px;padding:2rem;text-align:center;color:rgba(242,240,234,0.45);font-style:italic">Placeholder — looping background video (replace with authentic Standub footage)</div>
 </div>
-<div id="tour-list" style="margin-top:2rem;display:grid;gap:1rem;grid-template-columns:repeat(auto-fill,minmax(260px,1fr))"></div>
+<div id="tour-list" style="margin-top:2rem;"></div>
 <script>
 (async () => {
   try {
@@ -49,16 +49,23 @@
     const data = await res.json();
     const list = document.getElementById("tour-list");
     if (!Array.isArray(data) || data.length === 0) {
-      list.innerHTML = "<div class=\'card\' style=\'text-align:center\'><h3 style=\'font-family:Cormorant Garamond,Georgia,serif;font-weight:300;font-style:italic;font-size:1.4rem;color:var(--paper)\'>No dates announced yet</h3><p style=\'color:var(--mist);font-size:.95rem\'>Tour dates will appear here when confirmed.</p></div>";
+      list.innerHTML = '<div style="padding:.75rem 0;color:var(--mist);font-family:\'Space Grotesk\',sans-serif;font-size:1rem">No dates announced yet.</div>';
     } else {
-      list.innerHTML = data.map(d => `
-        <div class="card" style="text-align:center">
-          <h3 style="font-family:Cormorant Garamond,Georgia,serif;font-weight:300;font-style:italic;font-size:1.4rem;color:var(--paper);margin-bottom:.25rem">${d.date || ''} — ${d.venue || ''}</h3>
-          <p style="color:var(--mist);font-size:.95rem">${d.city || ''}${d.country ? ', '+d.country : ''}</p>
-          ${d.url ? `<a href="${d.url}" class="button button-secondary" style="margin-top:.5rem;display:inline-block">Tickets / Details</a>` : ''}
-          ${d.soldOut ? `<span style="font-size:.8rem;color:var(--rust);margin-top:.25rem;display:block">Sold out</span>` : ''}
-        </div>
-      `).join("");
+      list.innerHTML = data.map(d => {
+        const dateStr = d.date ? d.date : '';
+        const venueStr = d.venue || '';
+        const locStr = [d.city || '', d.country || ''].filter(Boolean).join(', ');
+        const soldStr = d.soldOut ? '<span style="color:var(--rust);font-family:\'Space Grotesk\',sans-serif;font-size:inherit"> Sold out</span>' : '';
+        const ticketStr = d.url ? `<a href="${d.url}" target="_blank" rel="noopener" style="color:var(--rust);text-decoration:none;font-family:\'Space Grotesk\',sans-serif;font-size:inherit">Tickets</a>` : '';
+        return `<div style="padding:.75rem 0;border-bottom:1px solid rgba(242,240,234,0.08);font-family:'Space Grotesk',sans-serif;font-size:1rem;color:var(--paper);line-height:1.4">
+  <div style="display:flex;flex-wrap:wrap;gap:.5rem .75rem;align-items:baseline">
+    <strong style="font-weight:700;color:var(--paper);font-size:inherit">${dateStr}</strong>
+    <span>${venueStr}${venueStr && locStr ? ' — ' : ''}${locStr}</span>
+    ${soldStr}
+  </div>
+  ${ticketStr ? `<div style="margin-top:.15rem">${ticketStr}</div>` : ''}
+</div>`;
+      }).join('');
     }
   } catch (e) {
     document.getElementById("tour-list").innerHTML = "<div class=\'card\' style=\'text-align:center\'><p style=\'color:var(--mist)\'>Unable to load tour dates.</p></div>";
