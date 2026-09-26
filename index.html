@@ -4,65 +4,77 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Standub — Live Electronic Music</title>
-<meta name="description" content="Standub — Belgian solo live electronic performer. Beatboxing, synths, loops, atmosphere." />
+<meta name="description" content="Standub — Belgian solo live electronic performer." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,300&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="/styles.css" />
-<meta property="og:title" content="Standub — Live Electronic Music" />
-<meta property="og:description" content="Belgian solo live electronic performer. Beatboxing, synths, loops, atmosphere." />
-<meta property="og:type" content="website" />
-<meta name="theme-color" content="#0a0c14" />
+<link rel="stylesheet" href="styles.css" />
+<style>section{scroll-margin-top:4.5rem}</style>
 </head>
 <body>
 <nav aria-label="Primary" class="site-nav">
-<a href="/" >Home</a>
-<a href="/about" >About</a>
-<a href="/live" >Live</a>
-<a href="/music" >Music</a>
-<a href="/performances" >Performances</a>
-<a href="/workshops" >Workshops</a>
-<a href="/contact" >Contact</a>
+<a href="/">Home</a>
+<a href="/about">About</a>
+<a href="/workshops">Workshops</a>
 </nav>
+
 <main>
-<section class="hero" aria-label="Hero">
-<div class="container hero-inner fade">
-<h1 class="hero-title">STANDUB</h1>
-<p class="hero-tagline">One man. A world of sound. Created live.</p>
-<p class="hero-description">From dreamy soundscapes to heavy basslines, Standub combines beatboxing, vocals and synthesis into an ever-evolving live performance.</p>
-<div class="hero-actions">
-<a href="/contact" class="button button-primary">Bring Standub to your stage</a>
-<a href="/music" class="button button-secondary">Listen to the music</a>
-</div>
-</div>
-</section><section class="section" aria-label="Intro" id="intro" >
-<div class="container narrow">
-<h2 class="section-heading editorial-heading">Created in the moment. Built from sound.</h2>
-<p class="section-body">Standub is a one-man-band performance built around live creation. Beatboxing, vocals, synthesizers and loops become the building blocks of each moment — improvised, responsive, and shared with the room.</p>
-</div>
-</section><section class="section section-teaser" aria-label="Music teaser">
-<div class="container">
-<div class="teaser-grid">
-<div>
-<h3 class="teaser-title">Original music</h3>
-<p class="teaser-text">The recordings capture moments from performances — not polished productions — and will be listed here when ready.</p>
-<a href="/music" class="teaser-link">Explore music →</a>
-</div>
-<div class="media-placeholder">Music artwork placeholder</div>
-</div>
-</div>
-</section><section class="section" aria-label="Performances teaser" >
-<div class="container">
-<div class="teaser-grid">
-<div class="media-placeholder">Performance photo placeholder</div>
-<div>
-<h3 class="teaser-title">Upcoming performances</h3>
-<p class="teaser-text">No confirmed dates yet — check back, or get in touch to bring Standub to your venue.</p>
-<a href="/performances" class="teaser-link">Upcoming dates →</a>
+<section class="hero" id="home" aria-label="Hero">
+<div class="hero-inner fade" style="position:relative;min-height:100dvh;display:flex;align-items:center;justify-content:center;padding:2rem 1.5rem;width:100%;max-width:none">
+<img src="assets/home-logo.svg" alt="STANDUB logo" style="width:320px;max-width:70vw;height:auto;z-index:2;position:relative" />
+<div style="position:absolute;inset:0;z-index:0">
+<img src="assets/home-foto.jpg" alt="Standub background" style="width:100%;height:100%;object-fit:cover;display:block" />
+<div style="position:absolute;top:.75rem;right:.5rem;z-index:10;display:flex;gap:.75rem">
+<a href="https://www.instagram.com/standubmusic?stkn=MWNnN3F4M3p2N3VjeA==" aria-label="Instagram" target="_blank" rel="noopener"><img src="assets/icons/instagram.svg" alt="Instagram" style="width:28px;height:28px;display:block;"></a>
+<a href="https://youtube.com" aria-label="YouTube" target="_blank" rel="noopener"><img src="assets/icons/youtube.svg" alt="YouTube" style="width:28px;height:28px;display:block;"></a>
+<a href="https://open.spotify.com/artist/4fRAapFroZDOJv3Lmr0Cox?si=-UoPb2yGQvaLkWT3nXV9yg" aria-label="Spotify" target="_blank" rel="noopener"><img src="assets/icons/spotify.svg" alt="Spotify" style="width:28px;height:28px;display:block;"></a>
+<a href="https://music.apple.com/us/artist/standub/1879868421" aria-label="Apple Music" target="_blank" rel="noopener"><img src="assets/icons/apple.svg" alt="Apple Music" style="width:28px;height:28px;display:block;"></a>
+<a href="https://soundcloud.com" aria-label="SoundCloud" target="_blank" rel="noopener"><img src="assets/icons/soundcloud.svg" alt="SoundCloud" style="width:28px;height:28px;display:block;"></a>
 </div>
 </div>
 </div>
 </section>
-</main>
-<footer class="site-footer">Standub — Belgian solo live electronic performer</footer>
+
+<section class="section" id="tour" aria-label="Upcoming Tour Dates">
+<div class="container">
+<h2 class="section-heading">Upcoming tour dates</h2>
+<div style="margin-top:2rem;position:relative;aspect-ratio:21/9;max-width:1000px;border:1px solid rgba(242,240,234,0.12);border-radius:12px;overflow:hidden;background:#12101a">
+<video autoplay muted loop playsinline preload="metadata" aria-label="Looping tour background video" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;z-index:0" src="" poster=""></video>
+<div style="position:relative;z-index:1;display:flex;align-items:center;justify-content:center;min-height:320px;padding:2rem;text-align:center;color:rgba(242,240,234,0.45);font-style:italic">Placeholder — looping background video (replace with authentic Standub footage)</div>
+</div>
+<div id="tour-list" style="margin-top:2rem;display:grid;gap:1rem;grid-template-columns:repeat(auto-fill,minmax(260px,1fr))"></div>
+<script>
+(async () => {
+  try {
+    const res = await fetch("/api/tour-dates");
+    const data = await res.json();
+    const list = document.getElementById("tour-list");
+    if (!Array.isArray(data) || data.length === 0) {
+      list.innerHTML = "<div class=\'card\' style=\'text-align:center\'><h3 style=\'font-family:Cormorant Garamond,Georgia,serif;font-weight:300;font-style:italic;font-size:1.4rem;color:var(--paper)\'>No dates announced yet</h3><p style=\'color:var(--mist);font-size:.95rem\'>Tour dates will appear here when confirmed.</p></div>";
+    } else {
+      list.innerHTML = data.map(d => `
+        <div class="card" style="text-align:center">
+          <h3 style="font-family:Cormorant Garamond,Georgia,serif;font-weight:300;font-style:italic;font-size:1.4rem;color:var(--paper);margin-bottom:.25rem">${d.date || ''} — ${d.venue || ''}</h3>
+          <p style="color:var(--mist);font-size:.95rem">${d.city || ''}${d.country ? ', '+d.country : ''}</p>
+          ${d.url ? `<a href="${d.url}" class="button button-secondary" style="margin-top:.5rem;display:inline-block">Tickets / Details</a>` : ''}
+          ${d.soldOut ? `<span style="font-size:.8rem;color:var(--rust);margin-top:.25rem;display:block">Sold out</span>` : ''}
+        </div>
+      `).join("");
+    }
+  } catch (e) {
+    document.getElementById("tour-list").innerHTML = "<div class=\'card\' style=\'text-align:center\'><p style=\'color:var(--mist)\'>Unable to load tour dates.</p></div>";
+  }
+})();
+</script>
+</div>
+</section>
+
+<section class="section section-alt" id="contact" aria-label="Contact">
+<div class="container" style="text-align:center;padding:4rem 1.5rem">
+<h2 class="section-heading">Contact</h2>
+<p><a href="mailto:meeusstan@gmail.com" style="font-size:1.5rem;color:var(--paper);text-decoration:none;font-family:'Cormorant Garamond',Georgia,serif;font-style:italic">Bookings: meeusstan@gmail.com</a></p>
+</div>
+</section>
+<footer style="border-top:1px solid rgba(242,240,234,0.1);padding:2rem 0;text-align:center"><img src="assets/home-logo.svg" alt="STANDUB" style="width:120px;height:auto;opacity:.35;display:block;margin:0 auto"></footer>
+<script>/* IntersectionObserver active state for nav */ const navLinks=document.querySelectorAll('.site-nav a'); const sections=document.querySelectorAll('section[id]'); const observer=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting){navLinks.forEach(link=>{link.classList.toggle('nav-active',link.getAttribute('href')==='#'+entry.target.id);});}});},{threshold:0.3,rootMargin:'-70px 0px -40% 0px'}); sections.forEach(s=>observer.observe(s));</script>
 </body>
 </html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Admin — Tour Dates</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,300&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="../styles.css">
+<style>section{scroll-margin-top:4.5rem} .admin-form input{padding:.5rem;background:#0a0c14;border:1px solid rgba(242,240,234,0.25);color:var(--paper);border-radius:6px;font-family:inherit;font-size:.9rem} .admin-form button{padding:.5rem 1rem;background:var(--rust);color:#fff;border:none;border-radius:6px;font-weight:500;cursor:pointer}</style>
+</head>
+<body>
+<nav aria-label="Primary" class="site-nav"><a href="/">Home</a><a href="/about">About</a><a href="/workshops">Workshops</a></nav>
+<main>
+<section class="section" id="admin" aria-label="Admin">
+<div class="container">
+<h2 class="section-heading">Admin — Tour Dates</h2>
+<p class="section-intro">Private. Enter the admin password to manage tour dates.</p>
+<div class="admin-form" style="max-width:600px;margin-top:1.5rem">
+<label for="pwd" style="font-size:.9rem;color:var(--mist)">Admin password</label>
+<input id="pwd" type="password" style="width:100%;margin-top:.25rem" />
+<button onclick="setAuth()">Unlock</button>
+</div>
+
+<div id="admin-panel" style="margin-top:3rem;display:none">
+<h3 style="font-family:'Cormorant Garamond',Georgia,serif;font-weight:300;font-style:italic;font-size:1.6rem;color:var(--paper);margin-bottom:1rem">Current dates</h3>
+<table style="width:100%;border-collapse:collapse;color:var(--mist);font-size:.9rem">
+<thead><tr style="border-bottom:1px solid rgba(242,240,234,0.15)"><th style="text-align:left;padding:.5rem">Date</th><th>Venue</th><th>City</th><th>URL</th><th>Sold out</th><th>Actions</th></tr></thead>
+<tbody id="dates-table"></tbody>
+</table>
+
+<form onsubmit="event.preventDefault(); addDate();" class="admin-form" style="margin-top:2rem;padding:1.5rem;background:rgba(242,240,234,0.03);border:1px solid rgba(242,240,234,0.08);border-radius:12px">
+<h3 style="font-family:'Cormorant Garamond',Georgia,serif;font-weight:300;font-style:italic;font-size:1.4rem;color:var(--paper);margin-bottom:.5rem">Add / edit</h3>
+<div style="display:grid;gap:.5rem;grid-template-columns:repeat(auto-fit,minmax(140px,1fr))">
+<input id="date" placeholder="YYYY-MM-DD" />
+<input id="venue" placeholder="Venue" />
+<input id="city" placeholder="City" />
+<input id="country" placeholder="Country (optional)" />
+<input id="url" placeholder="Ticket URL (optional)" />
+</div>
+<label style="display:flex;align-items:center;gap:.5rem;margin-top:.5rem;font-size:.9rem;color:var(--mist)"><input id="soldOut" type="checkbox" /> Sold out</label>
+<input type="hidden" id="editId" />
+<button type="submit" style="margin-top:.75rem">Save</button>
+<button type="button" onclick="clearForm()" style="margin-top:.75rem;margin-left:.5rem;background:transparent;border:1px solid rgba(242,240,234,0.35);color:var(--paper)">Cancel / New</button>
+</form>
+</div>
+</div>
+</section>
+</main>
+<footer style="border-top:1px solid rgba(242,240,234,0.1);padding:2rem 0;text-align:center;color:rgba(242,240,234,0.4);font-size:.85rem">Standub — Admin</footer>
+<script>
+let auth = "";
+function setAuth() {
+  auth = document.getElementById("pwd").value.trim();
+  if (!auth) { alert("Enter password"); return; }
+  document.getElementById("admin-panel").style.display = "block";
+  loadDates();
+}
+async function loadDates() {
+  try {
+    const res = await fetch("/api/tour-dates");
+    const data = await res.json();
+    const tbody = document.getElementById("dates-table");
+    tbody.innerHTML = (Array.isArray(data) ? data : []).map(d => `
+      <tr style="border-bottom:1px solid rgba(242,240,234,0.08)">
+        <td style="padding:.5rem">${d.date || ""}</td>
+        <td>${d.venue || ""}</td>
+        <td>${d.city || ""}</td>
+        <td>${d.url ? `<a href="${d.url}" target="_blank" style="color:var(--rust)">Link</a>` : ""}</td>
+        <td>${d.soldOut ? "Yes" : ""}</td>
+        <td><button onclick="editRow('${d.id}')">Edit</button> <button onclick="delRow('${d.id}')">Delete</button></td>
+      </tr>`).join("");
+  } catch (e) { document.getElementById("dates-table").innerHTML = "<tr><td colspan='6'>Unable to load data.</td></tr>"; }
+}
+function editRow(id) {
+  fetch("/api/tour-dates", { headers: { "X-Admin-Auth": auth } })
+    .then(r => r.json()).then(data => {
+      const all = Array.isArray(data) ? data : [];
+      const item = all.find(x => x.id === id);
+      if (!item) return;
+      document.getElementById("date").value = item.date || "";
+      document.getElementById("venue").value = item.venue || "";
+      document.getElementById("city").value = item.city || "";
+      document.getElementById("country").value = item.country || "";
+      document.getElementById("url").value = item.url || "";
+      document.getElementById("soldOut").checked = !!item.soldOut;
+      document.getElementById("editId").value = item.id;
+    });
+}
+function clearForm() {
+  document.getElementById("date").value = "";
+  document.getElementById("venue").value = "";
+  document.getElementById("city").value = "";
+  document.getElementById("country").value = "";
+  document.getElementById("url").value = "";
+  document.getElementById("soldOut").checked = false;
+  document.getElementById("editId").value = "";
+}
+async function addDate() {
+  const id = document.getElementById("editId").value || "";
+  const payload = {
+    id: id || (Math.random().toString(36).slice(2) + Date.now().toString(36)),
+    date: document.getElementById("date").value.trim(),
+    venue: document.getElementById("venue").value.trim(),
+    city: document.getElementById("city").value.trim(),
+    country: document.getElementById("country").value.trim() || undefined,
+    url: document.getElementById("url").value.trim() || undefined,
+    soldOut: document.getElementById("soldOut").checked
+  };
+  try {
+    const res = await fetch("/api/tour-dates", { method: "PUT", headers: { "Content-Type": "application/json", "X-Admin-Auth": auth }, body: JSON.stringify(payload) });
+    const result = await res.json();
+    if (!res.ok) { alert(result.error || "Save failed"); return; }
+    alert("Saved");
+    loadDates();
+    clearForm();
+  } catch (e) { alert("Network error"); }
+}
+async function delRow(id) {
+  try {
+    const res = await fetch("/api/tour-dates/" + encodeURIComponent(id), { method: "DELETE", headers: { "X-Admin-Auth": auth } });
+    const result = await res.json();
+    if (!res.ok) { alert(result.error || "Delete failed"); return; }
+    alert("Deleted");
+    loadDates();
+  } catch (e) { alert("Network error"); }
+}
+</script>
+</body>
+</html>

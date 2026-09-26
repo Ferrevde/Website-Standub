@@ -1,0 +1,7 @@
+name = "standub-worker"
+main = "functions/api/[[path]].js"
+compatibility_date = "2026-09-26"
+
+[[kv_namespaces]]
+binding = "TOUR_DATES"
+id = "dceca4c97a7f44c491096b4a87de4b44"
