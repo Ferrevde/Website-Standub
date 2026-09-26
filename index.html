@@ -36,7 +36,7 @@
 
 <section class="section" id="tour" aria-label="Shows" style="position:relative;min-height:100vh;padding:0;overflow:hidden;">
   <div style="position:absolute;inset:0;z-index:0;">
-    <div id="video-player" style="position:absolute;inset:0;z-index:0;overflow:hidden;"></div>
+    <div id="video-player" style="position:absolute;inset:0;z-index:0;overflow:hidden;"><div id="video-loading" style="position:absolute;inset:0;z-index:2;background:linear-gradient(180deg,#12101a,#0a0c14);transition:opacity 1.2s ease;opacity:1;pointer-events:none;"></div></div>
   </div>
   <div style="position:absolute;inset:0;z-index:1;background:linear-gradient(180deg, rgba(10,12,20,0.55) 0%, rgba(10,12,20,0.25) 60%, rgba(10,12,20,0.75) 100%);pointer-events:none;"></div>
   <div class="container" style="position:relative;z-index:2;padding-top:6rem;padding-bottom:6rem;">
@@ -52,7 +52,7 @@
     if (cfg.enabled && cfg.url) {
       const id = cfg.url.match(/(?:v=|youtu\.be\/)([a-zA-Z0-9_-]+)/)?.[1];
       if (id) {
-        container.innerHTML = `<iframe src="https://www.youtube.com/embed/${id}?autoplay=1&mute=1&loop=1&playlist=${id}&controls=0&playsinline=1&rel=0&iv_load_policy=3&cc_load_policy=0&disablekb=1&fs=0" style="position:absolute;top:50%;left:50%;width:100vw;height:56.25vw;min-width:100%;min-height:100%;transform:translate(-50%,-50%);border:0;pointer-events:none;" allow="autoplay; encrypted-media" title="Tour video"></iframe>`;
+        container.innerHTML = `<iframe src="https://www.youtube.com/embed/${id}?autoplay=1&mute=1&loop=1&playlist=${id}&controls=0&playsinline=1&rel=0&iv_load_policy=3&cc_load_policy=0&disablekb=1&fs=0&modestbranding=1&showinfo=0" style="position:absolute;top:50%;left:50%;width:100vw;height:56.25vw;min-width:100%;min-height:100%;transform:translate(-50%,-50%);border:0;pointer-events:none;" allow="autoplay; encrypted-media" title="Tour video"></iframe>`;
       } else {
         container.innerHTML = `<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:rgba(242,240,234,0.45);font-style:italic">Placeholder — looping background video (replace with authentic Standub footage)</div>`;
       }
@@ -62,6 +62,7 @@
   } catch (e) {
     document.getElementById("video-player").innerHTML = `<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:rgba(242,240,234,0.45);font-style:italic">Video unavailable.</div>`;
   }
+  setTimeout(() => { const ld = document.getElementById("video-loading"); if (ld) ld.style.opacity = "0"; }, 1500);
 })();
 </script><script>
 (async () => {
